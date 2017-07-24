@@ -18,6 +18,10 @@
 
 /* Multi-keys */
 #define CTLBSPC MT(MOD_LCTL, KC_BSPC)
+#define N_PLUS KC_KP_PLUS
+#define N_SLSH KC_KP_SLASH
+#define N_MNUS KC_KP_MINUS
+#define N_ASTK KC_KP_ASTERISK
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -25,23 +29,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /*
 
    ╭────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────────╮
-   | GRV│  1 │ 2  │ 3  │  4 │ 5  │  6 │  7 │  8 │  9 │  0 │ -  │ =  |   ESC  │
+   | `  │ 1  │ 2  │ 3  │ 4  │ 5  │  6 │  7 │  8 │  9 │  0 │ -  │ =  |   BSPC │
    ├────┴┬───┴┬─-─┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───────┤
    │ TAB | Q  | W  │ E  |  R │ T  │ Y  │ U  │ I  │ O  │ P  │ [  │ ]  │   \   │
    ├─────┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴───────┤
    │C/BSP │ A  │ S  │ D  │ F  │ G  │ H  │ J  │ K  │ L  │ ;  │ '  | ENT       │
    ├──────┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴──────┬────┤
-   │ LSHFT │ Z  │ X  │ C  │ V  │ B  │ N  │ M  │ ,  │ .  │ /  │ UP       | DEL│
+   │ LSHFT │ Z  │ X  │ C  │ V  │ B  │ N  │ M  │ ,  │ .  │ /  │      UP  |F(0)│
    ├──────┬┴────┴┬───┴──┬─┴────┴────┴────┴────┴────┴─┬──┴──┬─┴───┬────┬─┴────┤
-   │ LCTL │LGUI  │ LALT │           SPC              │ F(0)|LEFT │DOWN| RGHT │
+   │ LCTL │LGUI  │ LALT │           SPC              │ F(1)|LEFT │DOWN| RGHT │
    ╰──────┴──────┴──────┴────────────────────────────┴─────┴─────┴────┴──────╯
 
   */
   KEYMAP(
-         KC_GRAVE, KC_1,    KC_2,    KC_3,   KC_4, KC_5,    KC_6,    KC_7,      KC_8,    KC_9,   KC_0,    KC_MINS, KC_EQL,  KC_ESC,  \
+         KC_GRAVE, KC_1,    KC_2,    KC_3,   KC_4, KC_5,    KC_6,    KC_7,      KC_8,    KC_9,   KC_0,    KC_MINS, KC_EQL,  KC_BSPC, \
          KC_TAB,   KC_Q,    KC_W,    KC_E,   KC_R, KC_T,    KC_Y,    KC_U,      KC_I,    KC_O,   KC_P,    KC_LBRC, KC_RBRC, KC_BSLS, \
          CTLBSPC,  KC_A,    KC_S,    KC_D,   KC_F, KC_G,    KC_H,    KC_J,      KC_K,    KC_L,   KC_SCLN, KC_QUOT, KC_ENT, \
-         KC_LSFT,  KC_Z,    KC_X,    KC_C,   KC_V, KC_B,    KC_N,    KC_M,      KC_COMM, KC_DOT, KC_SLSH, KC_UP,   KC_DEL, \
+         KC_LSFT,  KC_Z,    KC_X,    KC_C,   KC_V, KC_B,    KC_N,    KC_M,      KC_COMM, KC_DOT, KC_SLSH, KC_UP,   F(0), \
          KC_LCTL,  KC_LGUI, KC_LALT, KC_SPC, F(0), KC_LEFT, KC_DOWN, KC_RIGHT), 
 
   // 1: Function Layer
@@ -49,31 +53,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /*
 
     ╭────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────────╮
-    | ESC│ F1 │ F2 │ F3 │ F4 │ F5 │ F6 │ F7 │ F8 │ F9 │ F10│ F11│ F12|  RESET │
+    | ESC│ F1 │ F2 │ F3 │ F4 │ F5 │ F6 │ F7 │ F8 │ F9 │ F10│ F11│ F12|  DEL   │
     ├────┴┬───┴┬─-─┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───────┤
-    │     | MUP| UP │ MDN|BSPC│ HME│ CLC│    │ INS│    │ PSC│ LCK|PAUS|  DEL  │
+    │     |PSC |LCK │PAUS|    │    │    |    │  1 │ 2  │ 3  │ +  | *  | NLCK  │
     ├─────┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴───────┤
-    │      │ LFT│ DWN│ RHT│ DEL│ END|PDWN│    │    │    │ HME│ PUP| ENT       │
+    │      │VOLU│VOLD│MUTE│    │    |    │    │ 4  │ 5  │ 6  │ -  | /         │
     ├──────┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴┬───┴──────┬────┤
-    │ LSHFT │    │ APP│ BTP|    │    |VOLD│VOLU│MUTE│ END│PDWN| PUP      | INS│
+    │       │PGUP│PGDN│HOME|END │    |    │    │  7 │ 8  │ 9  | 0        |F(0)│
     ├──────┬┴────┴┬───┴──┬─┴────┴────┴────┴────┴────┴─┬──┴──┬─┴───┬────┬─┴────┤
-    │ LCTL │LGUI  │ LALT │           SPC              │ F(0)|LEFT │PDWN| END  │
+    │ RESET│      │      │                            │ BSPC| DOT │ENT |      │
     ╰──────┴──────┴──────┴────────────────────────────┴─────┴─────┴────┴──────╯
 
   */
 
   KEYMAP(
-         KC_ESC,   KC_F1,   KC_F2,   KC_F3,    KC_F4,   KC_F5,   KC_F6,     KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12,  RESET, \
-         KC_NO,   KC_WH_U, KC_UP,   KC_WH_D,  KC_BSPC, KC_HOME, KC_CALC,   KC_NO,   KC_INS,  KC_NO,  KC_PSCR, KC_SLCK, KC_PAUS, KC_DEL, \
-         KC_NO,   KC_LEFT, KC_DOWN, KC_RIGHT, KC_DEL,  KC_END,  KC_PGDN,   KC_NO,   KC_NO,   KC_NO,  KC_HOME, KC_PGUP, KC_ENT, \
-         KC_LSFT, KC_NO,   KC_APP,  BL_STEP,  KC_NO,   KC_NO,   KC_VOLD,   KC_VOLU, KC_MUTE, KC_END, KC_PGDN, KC_PGUP, KC_INS, \
-         KC_LCTL, KC_LGUI, KC_LALT, KC_SPC,   F(0),    KC_LEFT, KC_PGDOWN, KC_END),
-
+         KC_ESC, KC_F1,   KC_F2,   KC_F3,   KC_F4,  KC_F5,   KC_F6,  KC_F7,  KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,  \
+         KC_NO,  KC_PSCR, KC_SLCK, KC_PAUS, KC_NO,  KC_NO,   KC_NO,  KC_NO,  KC_1, KC_2, KC_3, N_PLUS, N_ASTK, KC_NO, \
+         KC_NO,  KC_VOLU, KC_VOLD, KC_MUTE, KC_NO,  KC_NO,   KC_NO,  KC_NO,  KC_4, KC_5, KC_6, KC_MINUS, N_SLSH, \
+         KC_NO,  KC_PGUP, KC_PGDN, KC_HOME, KC_END, KC_NO,   KC_NO,  KC_NO,  KC_7, KC_8, KC_9, KC_0, F(0), \
+         RESET,  KC_NO,   KC_NO,   KC_NO,   KC_BSPC,  KC_DOT, KC_ENT, KC_NO),
 };
 
 // Custom Actions
 const uint16_t PROGMEM fn_actions[] = {
-  [0] = ACTION_LAYER_MOMENTARY(1),  // to Fn overlay
+  [0] = ACTION_LAYER_MOMENTARY(1),  // to Fn overlay 
 };
 
 // Macros
